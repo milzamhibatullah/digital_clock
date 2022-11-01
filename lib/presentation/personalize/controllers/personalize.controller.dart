@@ -1,3 +1,4 @@
+import 'package:Dclock/infrastructure/dal/services/local.storage.dart';
 import 'package:get/get.dart';
 
 class PersonalizeController extends GetxController {
@@ -19,5 +20,8 @@ class PersonalizeController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  void skipPersonalize()async{
+    prefs.setIsSkip();
+    await Get.offNamed('/home');
+  }
 }
