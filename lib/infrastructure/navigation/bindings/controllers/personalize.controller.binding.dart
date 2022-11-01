@@ -5,8 +5,6 @@ import '../../../../presentation/personalize/controllers/personalize.controller.
 class PersonalizeControllerBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<PersonalizeController>(
-      () => PersonalizeController(),
-    );
+    Get.put(PersonalizeController());
   }
 }

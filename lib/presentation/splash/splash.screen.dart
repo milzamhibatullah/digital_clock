@@ -1,3 +1,4 @@
+import 'package:Dclock/infrastructure/theme/assets.image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -9,14 +10,16 @@ class SplashScreen extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('SplashScreen'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Text(
-          'SplashScreen is working',
-          style: TextStyle(fontSize: 20),
+      body: Container(
+        width: Get.width,
+        height: Get.height,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            image: AssetImage(
+              AssetsImage.NIGHT_ILLUST
+            )
+          )
         ),
       ),
     );

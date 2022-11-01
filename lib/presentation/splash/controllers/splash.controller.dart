@@ -1,3 +1,4 @@
+import 'package:Dclock/infrastructure/dal/services/local.storage.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
@@ -7,11 +8,15 @@ class SplashController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    print('test');
+
   }
 
   @override
   void onReady() {
     super.onReady();
+    _nextScreen();
+
   }
 
   @override
@@ -19,5 +24,13 @@ class SplashController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  _nextScreen(){
+    Future.delayed(const Duration(seconds: 3,milliseconds: 500),()async{
+      if(await prefs.getDonePersonalize()=='true'||await prefs.getIsSkip()=='true'){
+        Get.offNamed('/home');
+      }else{
+        Get.offNamed('/personalize');
+      }
+    });
+  }
 }
