@@ -1,7 +1,7 @@
-name: digital_clock
+name: Dclock
 version: 1.0.0+1
 publish_to: none
-description: A new Flutter project.
+description: digital clock apps with alarm notifications
 environment: 
   sdk: '>=2.18.1 <3.0.0'
 
@@ -10,11 +10,16 @@ dependencies:
   get: 4.6.5
   flutter: 
     sdk: flutter
+  flutter_local_notifications: ^12.0.3
+  google_fonts: ^3.0.1
+  floor: ^1.3.0
 
 dev_dependencies: 
   flutter_lints: ^2.0.0
   flutter_test: 
     sdk: flutter
+  floor_generator: ^1.3.0
+  build_runner: ^2.1.2
 
 flutter: 
   uses-material-design: true
