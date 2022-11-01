@@ -1,16 +1,90 @@
-# digital_clock
 
-A new Flutter project.
+# Dclock Apps
 
-## Getting Started
+Dclock is learning projects apps to create digital clock for mobile platform
 
-This project is a starting point for a Flutter application.
+The apps created using Flutter framewok
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+
+
+## Authors
+
+- [@hmilzam](https://gitlab.com/users/hmilzam/projects)
+
+
+## FAQ
+
+#### What's learning goal from this projects
+
+The goal is  to understanding Local notification and saving data to local database using Flutter moor(SQLite Based)
+
+#### Is this project can be used by everyone to level-up the apps such as design and concept?
+
+Sure, this project can be use for everyone who re-design or re-concept the apps
+
+
+## Roadmap
+
+- Implementing Local Notifications
+
+- Implementing Local Database
+
+
+
+## Tech Stack
+
+**Framework:** Flutter
+
+**Architecture:** GetxCleanArch - Generate by GetX
+
+**Plugins:** flutter_local_notifications, floor, google_fonts
+
+**State Management:** GetX State management
+
+
+
+
+## How to run
+
+Clone the project
+
+```bash
+  git clone https://gitlab.com/hmilzam/digital_clock.git
+```
+
+Go to the project directory
+
+```bash
+  cd project/
+```
+
+Pull data from git
+
+```bash
+  git fetch
+  git checkout master
+  git pull origin master
+```
+
+Flutter depedencies
+
+```bash
+  flutter clean
+  flutter pub get
+```
+
+Run the apps
+
+```bash
+  flutter run
+```
+
+Run the apps with profile(RELEASE)
+
+```bash
+  flutter run --release
+```
