@@ -5,4 +5,6 @@ class Routes {
   }
 
   static const HOME = '/home';
+  static const PERSONALIZE = '/personalize';
+  static const SPLASH = '/splash';
 }
