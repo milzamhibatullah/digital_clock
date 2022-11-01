@@ -1,1 +1,1 @@
-export 'package:digital_clock/presentation/home/home.screen.dart';
+export 'package:Dclock/presentation/home/home.screen.dart';

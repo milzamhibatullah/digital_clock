@@ -1,10 +1,10 @@
+import 'package:Dclock/infrastructure/navigation/bindings/controllers/home.controller.binding.dart';
+import 'package:Dclock/presentation/home/home.screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
 import '../../config.dart';
-import '../../presentation/screens.dart';
-import 'bindings/controllers/controllers_bindings.dart';
 import 'routes.dart';
 
 class EnvironmentsBadge extends StatelessWidget {
