@@ -1,0 +1,1 @@
+export 'package:digital_clock/infrastructure/navigation/bindings/controllers/home.controller.binding.dart'; 
