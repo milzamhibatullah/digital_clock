@@ -35,7 +35,8 @@ class CreateAlarmPage extends GetView<HomeController> {
             child: Material(
               color: AppsColor.primaryColor,
               child: InkWell(
-                onTap: () {
+                onTap: ()async {
+                  await controller.addAlarm();
                   Get.back();
                 },
                 onLongPress: () {},

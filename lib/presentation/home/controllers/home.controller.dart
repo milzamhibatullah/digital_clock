@@ -1,13 +1,35 @@
+import 'package:Dclock/domain/core/model/alarm.model.dart';
 import 'package:Dclock/domain/core/model/days.model.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 
 class HomeController extends GetxController {
   var days = <DayModel>[].obs;
-
+  var alarms = <Alarm>[].obs;
+  final String boxDataNames='alarm-box';
+  late Box<Alarm> box;
   @override
   void onInit() {
+    _initiateDbLocal();
     _setUpDays();
     super.onInit();
+  }
+
+  _initiateDbLocal()async{
+    box=await Hive.openBox<Alarm>(boxDataNames);
+    ///then get the list
+    await getAlarms();
+  }
+
+  Future<void>getAlarms()async{
+    alarms.value=box.values.toList();
+    alarms.refresh();
+  }
+
+  Future<void>addAlarm()async{
+    await box.add(Alarm(name: 'test 1', time: '03:00 AM', enabled: true, days: days));
+    await getAlarms();
+
   }
 
   _setUpDays() {

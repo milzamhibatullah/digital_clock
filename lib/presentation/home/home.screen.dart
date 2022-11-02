@@ -33,7 +33,7 @@ class HomeScreen extends GetView<HomeController> {
         child: const Icon(Icons.add),
       ),
       backgroundColor: AppsColor.background,
-      body: Container(
+      body: Obx(()=>Container(
           width: Get.width,
           height: Get.height,
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -131,291 +131,108 @@ class HomeScreen extends GetView<HomeController> {
                     height: 20.0,
                   ),
 
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 10.0),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey.withOpacity(0.06),
-                              blurRadius: 5.0,
-                              spreadRadius: 10.0)
-                        ]),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ///date section
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.circle,
-                              size: 10.0,
-                              color: AppsColor.primaryColor,
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            appText.title(
-                                text: 'Hari ini',
-                                color: Colors.black26,
-                                size: 10.0)
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20.0,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            appText.regular(
-                                text: '03:00',
+                  controller.alarms.value.isNotEmpty?ListView(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.only(bottom: Get.height/6),
+                    children: List.generate(controller.alarms.length, (index) => Container(
+                      margin:const EdgeInsets.only(top: 10.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 10.0),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10.0),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.06),
+                                blurRadius: 5.0,
+                                spreadRadius: 10.0)
+                          ]),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ///date section
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.circle,
+                                size: 10.0,
                                 color: AppsColor.primaryColor,
-                                size: 68.0,
-                                weight: FontWeight.w200),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.start,
-                              direction: Axis.vertical,
-                              children: [
-                                const SizedBox(
-                                  height: 6.0,
-                                ),
-                                appText.regular(
-                                    text: '23',
-                                    size: 24.0,
-                                    color: AppsColor.primaryColor,
-                                    weight: FontWeight.w300),
-                                const SizedBox(
-                                  height: 2.0,
-                                ),
-                                appText.regular(
-                                    text: 'PM',
-                                    size: 24.0,
-                                    color: AppsColor.primaryColor,
-                                    weight: FontWeight.w300),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            const Expanded(
-                              flex: 1,
-                              child: SizedBox(
-                                height: 1.0,
                               ),
-                            ),
-                            CupertinoSwitch(
-                              value: true,
-                              onChanged: (value) {},
-                              activeColor: AppsColor.primaryColor,
-                              trackColor: AppsColor.background,
-                              thumbColor: Colors.white,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
+                              appText.title(
+                                  text: controller.alarms.value[index].name,
+                                  color: Colors.black26,
+                                  size: 10.0)
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              appText.regular(
+                                  text: '03:00',
+                                  color: AppsColor.primaryColor,
+                                  size: 68.0,
+                                  weight: FontWeight.w200),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
+                              Wrap(
+                                crossAxisAlignment: WrapCrossAlignment.start,
+                                direction: Axis.vertical,
+                                children: [
+                                  const SizedBox(
+                                    height: 6.0,
+                                  ),
+                                  appText.regular(
+                                      text: '23',
+                                      size: 24.0,
+                                      color: AppsColor.primaryColor,
+                                      weight: FontWeight.w300),
+                                  const SizedBox(
+                                    height: 2.0,
+                                  ),
+                                  appText.regular(
+                                      text: 'PM',
+                                      size: 24.0,
+                                      color: AppsColor.primaryColor,
+                                      weight: FontWeight.w300),
+                                ],
+                              ),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
+                              const Expanded(
+                                flex: 1,
+                                child: SizedBox(
+                                  height: 1.0,
+                                ),
+                              ),
+                              CupertinoSwitch(
+                                value: true,
+                                onChanged: (value) {},
+                                activeColor: AppsColor.primaryColor,
+                                trackColor: AppsColor.background,
+                                thumbColor: Colors.white,
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),),
+                  ):appText.title(text: 'yah blom ada data')
 
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 10.0),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey.withOpacity(0.06),
-                              blurRadius: 5.0,
-                              spreadRadius: 10.0)
-                        ]),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ///date section
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.circle,
-                              size: 10.0,
-                              color: AppsColor.primaryColor,
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            appText.title(
-                                text: 'Hari ini',
-                                color: Colors.black26,
-                                size: 10.0)
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20.0,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            appText.regular(
-                                text: '03:00',
-                                color: AppsColor.primaryColor,
-                                size: 68.0,
-                                weight: FontWeight.w200),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.start,
-                              direction: Axis.vertical,
-                              children: [
-                                const SizedBox(
-                                  height: 6.0,
-                                ),
-                                appText.regular(
-                                    text: '23',
-                                    size: 24.0,
-                                    color: AppsColor.primaryColor,
-                                    weight: FontWeight.w300),
-                                const SizedBox(
-                                  height: 2.0,
-                                ),
-                                appText.regular(
-                                    text: 'PM',
-                                    size: 24.0,
-                                    color: AppsColor.primaryColor,
-                                    weight: FontWeight.w300),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            const Expanded(
-                              flex: 1,
-                              child: SizedBox(
-                                height: 1.0,
-                              ),
-                            ),
-                            CupertinoSwitch(
-                              value: true,
-                              onChanged: (value) {},
-                              activeColor: AppsColor.primaryColor,
-                              trackColor: AppsColor.background,
-                              thumbColor: Colors.white,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 10.0),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey.withOpacity(0.06),
-                              blurRadius: 5.0,
-                              spreadRadius: 10.0)
-                        ]),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ///date section
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.circle,
-                              size: 10.0,
-                              color: AppsColor.primaryColor,
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            appText.title(
-                                text: 'Sen, Selasa, Rabu',
-                                color: Colors.black26,
-                                size: 10.0)
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20.0,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            appText.regular(
-                                text: '03:00',
-                                color: AppsColor.primaryColor,
-                                size: 68.0,
-                                weight: FontWeight.w200),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.start,
-                              direction: Axis.vertical,
-                              children: [
-                                const SizedBox(
-                                  height: 6.0,
-                                ),
-                                appText.regular(
-                                    text: '23',
-                                    size: 24.0,
-                                    color: AppsColor.primaryColor,
-                                    weight: FontWeight.w300),
-                                const SizedBox(
-                                  height: 2.0,
-                                ),
-                                appText.regular(
-                                    text: 'PM',
-                                    size: 24.0,
-                                    color: AppsColor.primaryColor,
-                                    weight: FontWeight.w300),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            const Expanded(
-                              flex: 1,
-                              child: SizedBox(
-                                height: 1.0,
-                              ),
-                            ),
-                            CupertinoSwitch(
-                              value: false,
-                              onChanged: (value) {},
-                              activeColor: AppsColor.primaryColor,
-                              trackColor: AppsColor.background,
-                              thumbColor: Colors.white,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),
-          )),
+          ))),
     );
   }
 }
