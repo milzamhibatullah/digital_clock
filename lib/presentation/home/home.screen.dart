@@ -1,6 +1,7 @@
 import 'package:Dclock/infrastructure/theme/apps.color..dart';
 import 'package:Dclock/infrastructure/theme/apps.text.dart';
 import 'package:Dclock/infrastructure/theme/assets.image.dart';
+import 'package:Dclock/presentation/home/alarm/create.alarm.page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,9 @@ class HomeScreen extends GetView<HomeController> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.toNamed('/create');
+        },
         backgroundColor: AppsColor.primaryColor,
         child: const Icon(Icons.add),
       ),

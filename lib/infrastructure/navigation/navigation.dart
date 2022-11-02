@@ -1,4 +1,5 @@
 import 'package:Dclock/infrastructure/navigation/bindings/controllers/splash.controller.binding.dart';
+import 'package:Dclock/presentation/home/alarm/create.alarm.page.dart';
 import 'package:Dclock/presentation/splash/splash.screen.dart';
 import 'package:flutter/material.dart';
 
@@ -36,6 +37,12 @@ class Nav {
     GetPage(
       name: Routes.HOME,
       page: () => const EnvironmentsBadge(child: HomeScreen()),
+      binding: HomeControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.CREATE_ALARM,
+      page: () => const EnvironmentsBadge(child: CreateAlarmPage()),
+      transition: Transition.downToUp,
       binding: HomeControllerBinding(),
     ),
     GetPage(

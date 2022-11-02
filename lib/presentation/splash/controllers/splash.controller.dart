@@ -25,7 +25,7 @@ class SplashController extends GetxController {
   }
 
   _nextScreen(){
-    Future.delayed(const Duration(seconds: 3,milliseconds: 500),()async{
+    Future.delayed(const Duration(seconds: 1,milliseconds: 500),()async{
       if(await prefs.getDonePersonalize()=='true'||await prefs.getIsSkip()=='true'){
         Get.offNamed('/home');
       }else{

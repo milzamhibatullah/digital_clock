@@ -65,7 +65,7 @@ class AppText{
         fontSize: size,
         color: color,
         fontWeight: weigth,
-        height: 1.5,
+        height: 1,
         fontStyle: italic ? FontStyle.italic : FontStyle.normal,
       );
 

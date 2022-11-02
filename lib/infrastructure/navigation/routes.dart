@@ -7,4 +7,5 @@ class Routes {
   static const HOME = '/home';
   static const PERSONALIZE = '/personalize';
   static const SPLASH = '/splash';
+  static const CREATE_ALARM='/create';
 }
