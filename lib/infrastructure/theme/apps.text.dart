@@ -23,14 +23,15 @@ class AppText{
       {String? text = '',
         double size = 14.0,
         Color color = Colors.black,
+        FontWeight weight = FontWeight.w400,
         bool italic = false}) =>
       Text(
         text!,
         style: GoogleFonts.montserrat(
           fontSize: size,
           color: color,
-          height: 1.5,
-          fontWeight: FontWeight.w400,
+          height: 1.0,
+          fontWeight: weight,
           fontStyle: italic ? FontStyle.italic : FontStyle.normal,
         ),
       );
