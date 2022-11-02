@@ -35,17 +35,17 @@ class Nav {
   static List<GetPage> routes = [
     GetPage(
       name: Routes.HOME,
-      page: () => const HomeScreen(),
+      page: () => const EnvironmentsBadge(child: HomeScreen()),
       binding: HomeControllerBinding(),
     ),
     GetPage(
       name: Routes.PERSONALIZE,
-      page: () => const PersonalizeScreen(),
+      page: () => const EnvironmentsBadge(child: PersonalizeScreen()) ,
       binding: PersonalizeControllerBinding(),
     ),
     GetPage(
       name: Routes.SPLASH,
-      page: () => const SplashScreen(),
+      page: () =>const EnvironmentsBadge(child: SplashScreen()),
       binding: SplashControllerBinding(),
     ),
   ];
