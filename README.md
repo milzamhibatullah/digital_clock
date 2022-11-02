@@ -20,7 +20,7 @@ The apps created using Flutter framewok
 
 #### What's learning goal from this projects
 
-The goal is  to understanding Local notification and saving data to local database using Flutter moor(SQLite Based)
+The goal is  to understanding Local notification and saving data to local database using Hive
 
 #### Is this project can be used by everyone to level-up the apps such as design and concept?
 
@@ -41,7 +41,7 @@ Sure, this project can be use for everyone who re-design or re-concept the apps
 
 **Architecture:** GetxCleanArch - Generate by GetX
 
-**Plugins:** flutter_local_notifications, floor, google_fonts
+**Plugins:** flutter_local_notifications, Hive, flutter_secure_storage, google_fonts
 
 **State Management:** GetX State management
 
