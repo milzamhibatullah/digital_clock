@@ -18,6 +18,7 @@ class HomeController extends GetxController {
   var selectedDate = ''.obs;
   var vibrateOn = false.obs;
   var alarmName = ''.obs;
+  var isEdit = false.obs;
   late Box<Alarm> box;
 
   @override
@@ -67,25 +68,31 @@ class HomeController extends GetxController {
   }
 
   Future<void> addAlarm() async {
+    var tempdays=<DayModel>[];
+    if(days.value.where((element) => element.selected==false).length==days.value.length){
+      days.value.forEach((element) {element.selected=true;});
+    }
+
+    tempdays=days;
     await box.add(Alarm(
-        name: alarmName.value.isEmpty?'Alarm ${alarms.value.length+1}':alarmName.value,
-        time: selectedDate.value.isEmpty?DateTime.now().toString():selectedDate.value,
+        name: alarmName.value.isEmpty
+            ? 'Alarm ${alarms.value.length + 1}'
+            : alarmName.value,
+        time: selectedDate.value.isEmpty
+            ? DateTime.now().toString()
+            : selectedDate.value,
         vibrateOn: vibrateOn.value,
         enabled: true,
-        days: days));
+        days: tempdays));
     await getAlarms();
   }
 
   _setUpDays() {
     var tempDays = <DayModel>[];
-    tempDays.add(DayModel(name: 'Min', selected: false));
-    tempDays.add(DayModel(name: 'Sen', selected: false));
-    tempDays.add(DayModel(name: 'Sel', selected: false));
-    tempDays.add(DayModel(name: 'Rab', selected: false));
-    tempDays.add(DayModel(name: 'Kam', selected: false));
-    tempDays.add(DayModel(name: 'Jum', selected: false));
-    tempDays.add(DayModel(name: 'Sab', selected: false));
-
+    var daily = DateFormat.EEEE('id').dateSymbols.STANDALONEWEEKDAYS;
+    for (var d in daily) {
+      tempDays.add(DayModel(name: d.substring(0,3).capitalizeFirst.toString(), selected: false));
+    }
     days.value = tempDays;
     days.refresh();
   }
@@ -96,9 +103,11 @@ class HomeController extends GetxController {
     for (var element in tempDays) {
       element.selected = false;
     }
+    isEdit.value=false;
     selectedDate.value = '';
     vibrateOn.value = false;
     alarmName.value = '';
+    editedIndex.value=0;
     days.value = tempDays;
   }
 
@@ -111,5 +120,33 @@ class HomeController extends GetxController {
 
     days.value = tempDays;
     days.refresh();
+  }
+
+  void changeEnableAlarm(int index, bool value) async {
+    await box.putAt(
+      index,
+      Alarm(
+          name: alarms.value[index].name,
+          time: alarms.value[index].time,
+          enabled: value,
+          vibrateOn: alarms.value[index].vibrateOn,
+          days: alarms.value[index].days),
+    );
+    await getAlarms();
+  }
+
+  ///edited index
+  var editedIndex=0.obs;
+  void setupEdit(index) {
+    isEdit.value=true;
+    editedIndex.value=index;
+    alarmName.value=alarms.value[index].name!;
+    selectedDate.value= alarms.value[index].time!;
+    vibrateOn.value=alarms.value[index].vibrateOn!;
+  }
+
+  deletAlarm()async {
+    await box.deleteAt(editedIndex.value);
+    await getAlarms();
   }
 }

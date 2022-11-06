@@ -29,6 +29,22 @@ class CreateAlarmPage extends GetView<HomeController> {
                   weight: FontWeight.w700,
                   size: 16.0,
                 ),
+                actions: [
+                  controller.isEdit.value
+                      ? IconButton(
+                          onPressed: () async {
+                            await controller.deletAlarm();
+                            Get.back();
+                          },
+                          icon: const Icon(
+                            Icons.delete_rounded,
+                            color: AppsColor.primaryColor,
+                          ))
+                      : const SizedBox(
+                          height: 0.0,
+                          width: 0.0,
+                        )
+                ],
               ),
               bottomNavigationBar: SizedBox(
                 height: 60,
@@ -46,7 +62,9 @@ class CreateAlarmPage extends GetView<HomeController> {
                     highlightColor: Colors.purple.withOpacity(0.5),
                     splashFactory: InkRipple.splashFactory,
                     child: Center(
-                      child: appText.title(text: 'Simpan', color: Colors.white),
+                      child: appText.title(
+                          text: controller.isEdit.value ? 'Ubah' : 'Simpan',
+                          color: Colors.white),
                     ),
                   ),
                 ),
@@ -83,6 +101,11 @@ class CreateAlarmPage extends GetView<HomeController> {
                                         weigth: FontWeight.w500))),
                             child: CupertinoDatePicker(
                               mode: CupertinoDatePickerMode.time,
+                              initialDateTime: controller.isEdit.value &&
+                                      controller.selectedDate.isNotEmpty
+                                  ? DateTime.parse(
+                                      controller.selectedDate.value)
+                                  : DateTime.now(),
                               use24hFormat: true,
                               onDateTimeChanged: (DateTime value) {
                                 controller.selectedDate.value =
@@ -163,7 +186,9 @@ class CreateAlarmPage extends GetView<HomeController> {
                                 controller.alarmName.value = value;
                               },
                               decoration: InputDecoration(
-                                  hintText: 'Input nama alarm',
+                                  hintText: controller.isEdit.value
+                                      ? controller.alarmName.value
+                                      : 'Input nama alarm',
                                   hintStyle: appText.styles(
                                       color: Colors.black38,
                                       weigth: FontWeight.normal),
