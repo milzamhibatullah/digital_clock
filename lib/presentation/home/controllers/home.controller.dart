@@ -1,23 +1,47 @@
+import 'dart:async';
+
 import 'package:Dclock/domain/core/model/alarm.model.dart';
 import 'package:Dclock/domain/core/model/days.model.dart';
 import 'package:Dclock/infrastructure/dal/services/local.storage.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
+
 
 class HomeController extends GetxController {
   var days = <DayModel>[].obs;
   var alarms = <Alarm>[].obs;
   final String boxDataNames='alarm-box';
+  var hoursAndMinute=''.obs;
+  var seconds=''.obs;
+  var dateNow=''.obs;
   final userName = ''.obs;
   late Box<Alarm> box;
   @override
   void onInit() {
     _initiateDbLocal();
+    _getCurrentTime();
     _setUpDays();
     _getUserName();
     super.onInit();
   }
 
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
+  _getCurrentTime(){
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      var now = DateFormat('EEEE, dd MMMM yyyy','id').format(DateTime.now());
+      var hours = DateTime.now().hour.toString().padLeft(2,'0');
+      var minutes = DateTime.now().minute.toString().padLeft(2,'0');
+      var second = DateTime.now().second.toString().padLeft(2,'0');
+      dateNow.value=now;
+      hoursAndMinute.value='$hours : $minutes';
+      seconds.value = second;
+    });
+  }
   _getUserName()async{
     var name = await prefs.getUserName();
     print('$name');

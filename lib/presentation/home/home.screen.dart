@@ -76,7 +76,7 @@ class HomeScreen extends GetView<HomeController> {
                               width: 10.0,
                             ),
                             appText.title(
-                                text: 'Senin, 2 November 2022',
+                                text: controller.dateNow.value,
                                 color: Colors.black26,
                                 size: 10.0)
                           ],
@@ -88,7 +88,7 @@ class HomeScreen extends GetView<HomeController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             appText.regular(
-                                text: '03:00',
+                                text: controller.hoursAndMinute.value,
                                 color: AppsColor.primaryColor,
                                 size: 68.0,
                                 weight: FontWeight.w200),
@@ -103,18 +103,11 @@ class HomeScreen extends GetView<HomeController> {
                                   height: 6.0,
                                 ),
                                 appText.regular(
-                                    text: '23',
+                                    text: controller.seconds.value,
                                     size: 24.0,
                                     color: AppsColor.primaryColor,
                                     weight: FontWeight.w300),
-                                const SizedBox(
-                                  height: 2.0,
-                                ),
-                                appText.regular(
-                                    text: 'PM',
-                                    size: 24.0,
-                                    color: AppsColor.primaryColor,
-                                    weight: FontWeight.w300),
+
                               ],
                             )
                           ],

@@ -1,6 +1,7 @@
 import 'package:Dclock/domain/core/model/alarm.model.dart';
 import 'package:Dclock/domain/core/model/days.model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -27,6 +28,15 @@ class Main extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: initialRoute,
       getPages: Nav.routes,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      supportedLocales: const [
+        Locale('id','ID')
+      ],
+
     );
   }
 }
