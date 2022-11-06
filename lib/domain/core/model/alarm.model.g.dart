@@ -20,6 +20,7 @@ class AlarmAdapter extends TypeAdapter<Alarm> {
       name: fields[0] as String?,
       time: fields[1] as String?,
       enabled: fields[2] as bool?,
+      vibrateOn: fields[4] as bool?,
       days: (fields[3] as List?)?.cast<DayModel>(),
     );
   }
@@ -27,7 +28,7 @@ class AlarmAdapter extends TypeAdapter<Alarm> {
   @override
   void write(BinaryWriter writer, Alarm obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class AlarmAdapter extends TypeAdapter<Alarm> {
       ..writeByte(2)
       ..write(obj.enabled)
       ..writeByte(3)
-      ..write(obj.days);
+      ..write(obj.days)
+      ..writeByte(4)
+      ..write(obj.vibrateOn);
   }
 
   @override

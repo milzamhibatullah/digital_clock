@@ -12,10 +12,13 @@ class Alarm extends HiveObject {
   bool? enabled;
   @HiveField(3)
   List<DayModel>? days;
+  @HiveField(4)
+  bool? vibrateOn;
 
   Alarm(
       {required this.name,
       required this.time,
       required this.enabled,
+        required this.vibrateOn,
       required this.days});
 }

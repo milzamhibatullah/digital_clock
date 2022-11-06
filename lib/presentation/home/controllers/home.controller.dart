@@ -7,16 +7,19 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 
-
 class HomeController extends GetxController {
   var days = <DayModel>[].obs;
   var alarms = <Alarm>[].obs;
-  final String boxDataNames='alarm-box';
-  var hoursAndMinute=''.obs;
-  var seconds=''.obs;
-  var dateNow=''.obs;
+  final String boxDataNames = 'alarm-box';
+  var hoursAndMinute = ''.obs;
+  var seconds = ''.obs;
+  var dateNow = ''.obs;
   final userName = ''.obs;
+  var selectedDate = ''.obs;
+  var vibrateOn = false.obs;
+  var alarmName = ''.obs;
   late Box<Alarm> box;
+
   @override
   void onInit() {
     _initiateDbLocal();
@@ -31,40 +34,46 @@ class HomeController extends GetxController {
     super.onReady();
   }
 
-  _getCurrentTime(){
+  _getCurrentTime() {
     Timer.periodic(const Duration(seconds: 1), (timer) {
-      var now = DateFormat('EEEE, dd MMMM yyyy','id').format(DateTime.now());
-      var hours = DateTime.now().hour.toString().padLeft(2,'0');
-      var minutes = DateTime.now().minute.toString().padLeft(2,'0');
-      var second = DateTime.now().second.toString().padLeft(2,'0');
-      dateNow.value=now;
-      hoursAndMinute.value='$hours : $minutes';
+      var now = DateFormat('EEEE, dd MMMM yyyy', 'id').format(DateTime.now());
+      var hours = DateTime.now().hour.toString().padLeft(2, '0');
+      var minutes = DateTime.now().minute.toString().padLeft(2, '0');
+      var second = DateTime.now().second.toString().padLeft(2, '0');
+      dateNow.value = now;
+      hoursAndMinute.value = '$hours : $minutes';
       seconds.value = second;
     });
   }
-  _getUserName()async{
+
+  _getUserName() async {
     var name = await prefs.getUserName();
     print('$name');
-    if(name!=null){
-      userName.value=name.toString();
+    if (name != null) {
+      userName.value = name.toString();
     }
   }
 
-  _initiateDbLocal()async{
-    box=await Hive.openBox<Alarm>(boxDataNames);
+  _initiateDbLocal() async {
+    box = await Hive.openBox<Alarm>(boxDataNames);
+
     ///then get the list
     await getAlarms();
   }
 
-  Future<void>getAlarms()async{
-    alarms.value=box.values.toList();
+  Future<void> getAlarms() async {
+    alarms.value = box.values.toList();
     alarms.refresh();
   }
 
-  Future<void>addAlarm()async{
-    await box.add(Alarm(name: 'test 1', time: '03:00 AM', enabled: true, days: days));
+  Future<void> addAlarm() async {
+    await box.add(Alarm(
+        name: alarmName.value.isEmpty?'Alarm ${alarms.value.length+1}':alarmName.value,
+        time: selectedDate.value.isEmpty?DateTime.now().toString():selectedDate.value,
+        vibrateOn: vibrateOn.value,
+        enabled: true,
+        days: days));
     await getAlarms();
-
   }
 
   _setUpDays() {
@@ -77,7 +86,7 @@ class HomeController extends GetxController {
     tempDays.add(DayModel(name: 'Jum', selected: false));
     tempDays.add(DayModel(name: 'Sab', selected: false));
 
-    days.value=tempDays;
+    days.value = tempDays;
     days.refresh();
   }
 
@@ -87,7 +96,9 @@ class HomeController extends GetxController {
     for (var element in tempDays) {
       element.selected = false;
     }
-
+    selectedDate.value = '';
+    vibrateOn.value = false;
+    alarmName.value = '';
     days.value = tempDays;
   }
 
@@ -98,8 +109,7 @@ class HomeController extends GetxController {
         ? tempDays[index].selected = false
         : tempDays[index].selected = true;
 
-    days.value=tempDays;
+    days.value = tempDays;
     days.refresh();
-
   }
 }
