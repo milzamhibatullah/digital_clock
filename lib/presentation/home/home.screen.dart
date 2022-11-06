@@ -18,11 +18,11 @@ class HomeScreen extends GetView<HomeController> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
-        title: appText.regular(
-            text: 'DClock',
+        title: Obx(()=>appText.regular(
+            text: controller.userName.value.isNotEmpty?'Hi, ${controller.userName.value}':'DClock',
             color: AppsColor.primaryColor,
             size: 24.0,
-            weight: FontWeight.w400),
+            weight: FontWeight.w400)),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
@@ -146,7 +146,7 @@ class HomeScreen extends GetView<HomeController> {
                             BoxShadow(
                                 color: Colors.grey.withOpacity(0.06),
                                 blurRadius: 5.0,
-                                spreadRadius: 10.0)
+                                spreadRadius: 2.0)
                           ]),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,

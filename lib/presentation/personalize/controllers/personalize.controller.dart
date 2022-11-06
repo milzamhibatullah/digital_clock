@@ -2,7 +2,7 @@ import 'package:Dclock/infrastructure/dal/services/local.storage.dart';
 import 'package:get/get.dart';
 
 class PersonalizeController extends GetxController {
-  //TODO: Implement PersonalizeController
+  var name=''.obs;
 
   final count = 0.obs;
   @override
@@ -20,8 +20,14 @@ class PersonalizeController extends GetxController {
     super.onClose();
   }
 
-  void skipPersonalize()async{
-    prefs.setIsSkip();
+  void donePersonalize()async{
+    prefs.setDonePersonalize();
     await Get.offNamed('/home');
+  }
+
+  void setupUserName()async{
+     prefs.setUsername(name.value);
+     name.value='';
+     donePersonalize();
   }
 }

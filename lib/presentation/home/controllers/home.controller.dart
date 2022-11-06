@@ -1,5 +1,6 @@
 import 'package:Dclock/domain/core/model/alarm.model.dart';
 import 'package:Dclock/domain/core/model/days.model.dart';
+import 'package:Dclock/infrastructure/dal/services/local.storage.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
@@ -7,12 +8,22 @@ class HomeController extends GetxController {
   var days = <DayModel>[].obs;
   var alarms = <Alarm>[].obs;
   final String boxDataNames='alarm-box';
+  final userName = ''.obs;
   late Box<Alarm> box;
   @override
   void onInit() {
     _initiateDbLocal();
     _setUpDays();
+    _getUserName();
     super.onInit();
+  }
+
+  _getUserName()async{
+    var name = await prefs.getUserName();
+    print('$name');
+    if(name!=null){
+      userName.value=name.toString();
+    }
   }
 
   _initiateDbLocal()async{

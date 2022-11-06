@@ -8,12 +8,11 @@ import 'controllers/personalize.controller.dart';
 
 class PersonalizeScreen extends GetView<PersonalizeController> {
   const PersonalizeScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
+        child: Obx(()=>Container(
           width: Get.width,
           height: Get.height,
           decoration: const BoxDecoration(
@@ -22,15 +21,6 @@ class PersonalizeScreen extends GetView<PersonalizeController> {
                   image: AssetImage(AssetsImage.AFTERNOON_ILLUST))),
           child: Stack(
             children: [
-              Align(
-                alignment: Alignment.topRight,
-                child: TextButton(
-                  onPressed: () {
-                    controller.skipPersonalize();
-                  },
-                  child: appText.title(text: 'SKIP', color: Colors.white),
-                ),
-              ),
               Align(
                 alignment: Alignment.bottomLeft,
                 child: Container(
@@ -70,6 +60,11 @@ class PersonalizeScreen extends GetView<PersonalizeController> {
                         height: 16.0,
                       ),
                       TextFormField(
+                        onChanged: (value){
+                          if(value.isNotEmpty){
+                            controller.name.value=value;
+                          }
+                        },
                         decoration: InputDecoration(
                             hintText: 'Nama kamu ...',
                             hintStyle: appText.styles(size: 14.0,color: Colors.black38),
@@ -82,8 +77,8 @@ class PersonalizeScreen extends GetView<PersonalizeController> {
                         height: 10.0,
                       ),
                       ElevatedButton(
-                        onPressed: (){
-                          controller.skipPersonalize();
+                        onPressed: controller.name.value.isEmpty?null:(){
+                          controller.setupUserName();
                         },
                         style: ElevatedButton.styleFrom(
                           fixedSize: Size(Get.width, 56.0),
@@ -99,7 +94,7 @@ class PersonalizeScreen extends GetView<PersonalizeController> {
               )
             ],
           ),
-        ),
+        )),
       ),
     );
   }
