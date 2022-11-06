@@ -220,7 +220,28 @@ class HomeScreen extends GetView<HomeController> {
                         ],
                       ),
                     ),),
-                  ):appText.title(text: 'yah blom ada data')
+                  ):Container(
+                    padding: EdgeInsets.all(16.0),
+                    decoration:BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey.withOpacity(0.06),
+                              blurRadius: 5.0,
+                              spreadRadius: 10.0)
+                        ]),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(AssetsImage.NO_ALARM_ILLUST),
+                        const SizedBox(height: 10.0,),
+                        appText.regular(text: 'Kamu belum men-setup alarm',color: AppsColor.primaryColor,size: 16.0),
+                        const SizedBox(height: 10.0,),
+                      ],
+                    ),
+                  )
 
                 ],
               ),
